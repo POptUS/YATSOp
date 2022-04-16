@@ -200,8 +200,8 @@ case 120 % CUBE %OPM CUBE
         h = 1 / (d + 1);
         lam = 4;  % LAMBDA is the Bratu problem parameter.  It should be positive.
         lh2 = lam * h^2;
-        x = [zeros(1, d); reshape(x, d, d); zeros(1, d)]';
-        u = [zeros(1, d + 2);  x; zeros(1, d + 2)];
+        u = zeros(d + 2, d + 2);
+        u(2:d + 1, 2:d + 1) = reshape(x, d, d);
         ff = zeros(d, d);
         for i = 1:d
             for j = 1:d
@@ -216,8 +216,8 @@ case 120 % CUBE %OPM CUBE
         h = 1 / (d + 1);
         lam = 6.80812;  % lambda is the Bratu problem parameter.  It should be positive.
         lh2 = lam * h^2;
-        x = [zeros(1, d); reshape(x, d, d); zeros(1, d)]';
-        u = [zeros(1, d + 2);  x; zeros(1, d + 2)];
+        u = zeros(d + 2, d + 2);
+        u(2:d + 1, 2:d + 1) = reshape(x, d, d);
         ff = zeros(d, d);
         for i = 1:d
             for j = 1:d
