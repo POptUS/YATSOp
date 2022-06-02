@@ -92,6 +92,21 @@ switch probtype
         z = (probspecs.sigma*sqrt(3))*(2*rand(probspecs.m,1) - ones(probspecs.m,1));
         fvec = fvec.*(1 + z);
         y = sum(fvec.^2);
+    
+    case 'absnormal2'
+        z = probspecs.sigma*randn;
+        y = sum(fvec.^2) + z;
+    case 'absuniform2'
+        z = (probspecs.sigma*sqrt(3))*(2*rand - 1);
+        y = sum(fvec.^2) + z;
+    case 'reluniform2'
+        z = (probspecs.sigma*sqrt(3))*(2*rand - 1);
+        y = sum(fvec.^2)*(1 + z);
+    case 'relnormal2'
+        z = probspecs.sigma*randn;
+        y = sum(fvec.^2)*(1 + z);
+    
+        
     case 'relwild'
         z = 0.9*sin(100*norm(x,1))*cos(100*norm(x,inf)) + 0.1*cos(norm(x,2));
         z = z*(4*z^2 - 3);
