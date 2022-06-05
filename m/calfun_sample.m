@@ -34,7 +34,7 @@ function [y, fvec] = calfun_sample(x, probspecs, probtype)
 %     desires. They are:
 %       nfev is a non-negative integer containing the number of function
 %          evaluations done so far (nfev=0 is a good default).
-%          after calling calfun, nfev will be incremented by one.
+%          after calling calfun_sample, nfev will be incremented by one.
 %       np is a counter for the test problem number. np=1 is a good
 %          default if only a single problem/run will be done.
 %       fvals is a matrix containing the history of function
