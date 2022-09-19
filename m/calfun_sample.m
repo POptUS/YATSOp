@@ -47,9 +47,19 @@ function [y, fvec] = calfun_sample(x, probspecs, probtype)
 % Reference the starting point script for allowable definitions. Point to
 % BENDFO. Provide problem descriptions
 
-%global m nprob probtype fvals nfev np trunc
+% global m nprob probtype fvals nfev np trunc
 
-n = size(x,1); % Problem dimension
+
+if size(x, 1) == 1
+    x = x(:); % Ensure input is a column vector
+end
+
+n = size(x, 1); % Problem dimension
+
+eid = 'Input:dimensionIncompatible';
+if nin ~= probspecs.n
+    error(eid, 'Input x is not of size n by 1.');
+end
 
 % Generate the vector
 fvec = mghvec(probspecs.m,probspecs.n,x,probspecs.nprob);
