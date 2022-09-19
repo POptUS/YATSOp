@@ -6,7 +6,7 @@ function fvec = mghvec(m, n, x, nprob)
 %         function evaluated at x.
 %       m and n are positive integer input variables. n must not
 %         exceed m; allowable sizes depend on the problem.
-%       x is an input array of length n; allow sizes depend on the problem.
+%       x is an input with columns of length n; allowable sizes depend on the problem.
 %       nprob is a positive integer input variable which defines the
 %         number of the MGH problem (or other number)
 %
