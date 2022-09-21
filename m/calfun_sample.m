@@ -54,7 +54,7 @@ if size(x, 1) == 1
     x = x(:); % Ensure input is a column vector
 end
 
-n = size(x, 1); % Problem dimension
+nin = size(x, 1); % Problem dimension
 
 eid = 'Input:dimensionIncompatible';
 if nin ~= probspecs.n
