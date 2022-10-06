@@ -316,7 +316,7 @@ switch nprob
         if m ~= n
             error(eid, err{1});
         end
-        %! Need to revisit for octave versus matlab
+        % ! Need to revisit for octave versus matlab
         if mod(nthroot(n, 3), 1) ~= 0
             error(eid, err{5});
         end

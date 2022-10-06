@@ -1,12 +1,6 @@
 % Sample calling syntax for the dfo and mgh funs from
 %  https://github.com/POptUS/YATSOp
 % After cloning the above repository, please set the following variable:
-%yatsop_location = '../../../YATSOp'; % For all
-%yatsop_location = 'C:/Users/liljo/Dropbox/Dzahini_Wild/YATSOp'; % For KJD
-%yatsop_location = '~/repos/poptus/YATSOp/'; % This location is for SW
-%addpath([yatsop_location, '/m/']);
-
-
 
 % Define Var array that shows problem specifications (nprob, n, m, h)
 % Largescale (Table 3 from arxiv:2102.12016)
@@ -62,7 +56,7 @@ nrows = size(Var, 1);
 probtype = 'smooth';
 probspecs.trunc = 10^16; % Chosen so that starting point unaffected
 if noiseflag
-    addpath('~/repos/randprojections21/src/testfuncs/')
+    addpath('~/repos/randprojections21/src/testfuncs/');
     fprintf('num     prob     n     m            f0     noise     hopt    time\n');
 else
     fprintf('Problem  &   n  &  m  &         f0   &      fbest   &   h   \\\\ \n');
@@ -78,17 +72,17 @@ for i = 1:40 % nrows
     [X0, prob] = dfoxsnew(probspecs.m, probspecs.n, probspecs.nprob); % starting point
     namestr{i} = prob.name;
     X0 = factor * X0;
-    
+
     tic;
     y = calfun_sample(X0, probspecs, probtype);
     ti = toc;
     % for now, overwrite y and let fvals do the work
-    
+
     if noiseflag
         h = 1e-11;
         nf = 23;
         rand('state', 1); % Matlab may warn, but here's how I get reproducibility
-        
+
         p = rand(probspecs.n, 1);  % The direction along which to compute derivative
         for j = 1:nf
             fval(j) = calfun_sample(X0 + h * (j - 7) * p, probspecs, probtype);
@@ -97,7 +91,7 @@ for i = 1:40 % nrows
         [fnoise(i, 1), level, inform(i, 1)] = ECnoise(nf, fval);
         [fder2(i), s2n(i)] = f2est(@calfun_sample, nf, X0, h, p, fval, fnoise(i), probspecs, probtype);
         hopt(i, 1) = 1.68 * sqrt(fnoise(i) / abs(fder2(i)));
-        
+
         p = rand(probspecs.n, 1);  % The direction along which to compute derivative
         for j = 1:nf
             fval(j) = calfun_sample(X0 + h * (j - 7) * p, probspecs, probtype);
@@ -124,12 +118,12 @@ for i = 1:40 % nrows
     else
         fprintf('%3i  %8s  %i  %i  %12.7g %8.0e %7.6f\n', probspecs.nprob, ...
             namestr{i}, probspecs.n, probspecs.m, y, prob.h, ti);
-     %   load hvals_mid
-       % load hvals
-        %load Bestmid2
-        %fprintf('%8s &  %i & %i & %12.7g & %12.7g & %8.0e   \\\\ \n', ...
+        % load hvals_mid
+        % load hvals
+        % load Bestmid2
+        % fprintf('%8s &  %i & %i & %12.7g & %12.7g & %8.0e   \\\\ \n', ...
         %    namestr{i}, probspecs.n, probspecs.m, y, Best{i}.fv, Var(i,4)/100);
-            %    rat(i) = (Var(i,4)/100)/(max(hopt(i)/1,1e-16));
+        %    rat(i) = (Var(i,4)/100)/(max(hopt(i)/1,1e-16));
     end
 end
 
@@ -138,7 +132,6 @@ if noiseflag
     % more than an order of magnitude:
     min(min([hopt hopt2 hopt3], [], 2) ./ max([hopt hopt2 hopt3], [], 2));
     min(min([fnoise fnoise2 fnoise3], [], 2) ./ max([fnoise fnoise2 fnoise3], [], 2));
-
     hopt = round(hopt, 1, 'significant');
     save hvals_mid hopt namestr;
 end

@@ -1,10 +1,10 @@
 function [y, fvec] = calfun_sample(x, probspecs, probtype)
 %     This is a modified version of the subroutine calfun.m
 %     available at
-%     http://www.mcs.anl.gov/~more/dfo/
+%     https://github.com/POptUS/BenDFO
 %
 %     Inputs:
-%       x 	n-by-1 array 
+%       x 	n-by-1 array
 %       probspecs is a struc containing:
 %           m : positive integer (length of output from mghvec)
 %           nprob : positive integer defining the number of the problem
@@ -40,15 +40,9 @@ function [y, fvec] = calfun_sample(x, probspecs, probtype)
 %       fvals is a matrix containing the history of function
 %          values, the entry fvals(nfev+1,np) being updated here.
 %
-
-
-
-%! Todo:
+% ! Todo:
 % Reference the starting point script for allowable definitions. Point to
 % BENDFO. Provide problem descriptions
-
-% global m nprob probtype fvals nfev np trunc
-
 
 if size(x, 1) == 1
     x = x(:); % Ensure input is a column vector
@@ -62,69 +56,66 @@ if nin ~= probspecs.n
 end
 
 % Generate the vector
-fvec = mghvec(probspecs.m,probspecs.n,x,probspecs.nprob);
+fvec = mghvec(probspecs.m, probspecs.n, x, probspecs.nprob);
 
 % Optional truncation:
-if isfield(probspecs,'trunc') && max(abs(fvec))>probspecs.trunc
-    fvec = sign(fvec).*min(abs(fvec),probspecs.trunc);
+if isfield(probspecs, 'trunc') && max(abs(fvec)) > probspecs.trunc
+    fvec = sign(fvec) .* min(abs(fvec), probspecs.trunc);
     %  display('Component function value exceeds trunc')
 end
 
 % Optional for noisy problems:
-if ~isfield(probspecs,'sigma') % default for noisy problems
+if ~isfield(probspecs, 'sigma') % default for noisy problems
     probspecs.sigma = 10^-3;
 end
-if isfield(probspecs,'seed') % if seed is specified
-    rand('seed',probspecs.seed)
+if isfield(probspecs, 'seed') % if seed is specified
+    rand('seed', probspecs.seed);
 end
 
 % Calculate the function value
 switch probtype
     case 'absnormal'
-        z = probspecs.sigma*randn(probspecs.m,1);
+        z = probspecs.sigma * randn(probspecs.m, 1);
         fvec = fvec + z;
         y = sum(fvec.^2);
     case 'absuniform'
-        z = (probspecs.sigma*sqrt(3))*(2*rand(probspecs.m,1) - ones(probspecs.m,1));
+        z = (probspecs.sigma * sqrt(3)) * (2 * rand(probspecs.m, 1) - ones(probspecs.m, 1));
         fvec = fvec + z;
         y = sum(fvec.^2);
     case 'abswild'
-        z = 0.9*sin(100*norm(x,1))*cos(100*norm(x,inf)) + 0.1*cos(norm(x,2));
-        z = z*(4*z^2 - 3);
+        z = 0.9 * sin(100 * norm(x, 1)) * cos(100 * norm(x, inf)) + 0.1 * cos(norm(x, 2));
+        z = z * (4 * z^2 - 3);
         y = sum(fvec.^2) + z;
     case 'nondiff'
         y = sum(abs(fvec));
     case 'relnormal'
-        z = probspecs.sigma*randn(probspecs.m,1);
-        fvec = fvec.*(1 + z);
+        z = probspecs.sigma * randn(probspecs.m, 1);
+        fvec = fvec .* (1 + z);
         y = sum(fvec.^2);
     case 'reluniform'
-        z = (probspecs.sigma*sqrt(3))*(2*rand(probspecs.m,1) - ones(probspecs.m,1));
-        fvec = fvec.*(1 + z);
+        z = (probspecs.sigma * sqrt(3)) * (2 * rand(probspecs.m, 1) - ones(probspecs.m, 1));
+        fvec = fvec .* (1 + z);
         y = sum(fvec.^2);
-    
     case 'absnormal2'
-        z = probspecs.sigma*randn;
+        z = probspecs.sigma * randn;
         y = sum(fvec.^2) + z;
     case 'absuniform2'
-        z = (probspecs.sigma*sqrt(3))*(2*rand - 1);
+        z = (probspecs.sigma * sqrt(3)) * (2 * rand - 1);
         y = sum(fvec.^2) + z;
     case 'reluniform2'
-        z = (probspecs.sigma*sqrt(3))*(2*rand - 1);
-        y = sum(fvec.^2)*(1 + z);
+        z = (probspecs.sigma * sqrt(3)) * (2 * rand - 1);
+        y = sum(fvec.^2) * (1 + z);
     case 'relnormal2'
-        z = probspecs.sigma*randn;
-        y = sum(fvec.^2)*(1 + z);
-    
-        
+        z = probspecs.sigma * randn;
+        y = sum(fvec.^2) * (1 + z);
     case 'relwild'
-        z = 0.9*sin(100*norm(x,1))*cos(100*norm(x,inf)) + 0.1*cos(norm(x,2));
-        z = z*(4*z^2 - 3);
-        y = (1 + probspecs.sigma*z)*sum(fvec.^2);
+        z = 0.9 * sin(100 * norm(x, 1)) * cos(100 * norm(x, inf)) + 0.1 * cos(norm(x, 2));
+        z = z * (4 * z^2 - 3);
+        y = (1 + probspecs.sigma * z) * sum(fvec.^2);
     case 'smooth'
         y = sum(fvec.^2);
 end
 
 % Update the function value history
-%nfev = nfev + 1;
-%fvals(nfev,np) = y;
+% nfev = nfev + 1;
+% fvals(nfev,np) = y;
