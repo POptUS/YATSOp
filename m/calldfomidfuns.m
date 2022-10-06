@@ -59,7 +59,7 @@ if noiseflag
     addpath('~/repos/randprojections21/src/testfuncs/');
     fprintf('num     prob     n     m            f0     noise     hopt    time\n');
 else
-    fprintf('Problem  &   n  &  m  &         f0   &      fbest   &   h   \\\\ \n');
+    fprintf('Problem     n    m            f0     h   \n');
 %        fprintf('num     prob     n     m            f0     hopt    time\n');
 
 end
@@ -113,11 +113,13 @@ for i = 1:40 % nrows
         fnoise0(i, 1) = (fnoise(i) + fnoise2(i) + fnoise3(i)) / 3;
         hopt0(i, 1) = (hopt(i) + hopt2(i) + hopt3(i)) / 3;
 
-        fprintf('%3i  %8s  %i  %i  %12.7g %8.0e %8.0e %7.6f\n', probspecs.nprob, ...
-            namestr{i}, probspecs.n, probspecs.m, y, fnoise0(i), hopt0(i), ti);
+        %fprintf('%3i  %8s  %i  %i  %12.7g %8.0e %8.0e %7.6f\n', probspecs.nprob, ...
+        fprintf('%8s  %i  %i  %12.7g %8.0e %8.0e \n', ...
+            namestr{i}, probspecs.n, probspecs.m, y, fnoise0(i), hopt0(i));
     else
-        fprintf('%3i  %8s  %i  %i  %12.7g %8.0e %7.6f\n', probspecs.nprob, ...
-            namestr{i}, probspecs.n, probspecs.m, y, prob.h, ti);
+        %fprintf('%3i  %8s  %i  %i  %12.7g %8.0e %7.6f\n', probspecs.nprob, ...
+        fprintf('%8s  %i  %i  %12.7g %8.0e \n', ...
+            namestr{i}, probspecs.n, probspecs.m, y, prob.h);
         % load hvals_mid
         % load hvals
         % load Bestmid2
