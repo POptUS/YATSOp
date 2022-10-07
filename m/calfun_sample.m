@@ -1,44 +1,44 @@
 function [y, fvec] = calfun_sample(x, probspecs, probtype)
-%     This is a modified version of the subroutine calfun.m
-%     available at
-%     https://github.com/POptUS/BenDFO
+% This is a modified version of the subroutine calfun.m
+% available at
+% https://github.com/POptUS/BenDFO
 %
-%     Inputs:
-%       x 	n-by-1 array
-%       probspecs is a struc containing:
-%           m : positive integer (length of output from mghvec)
-%           nprob : positive integer defining the number of the problem
-%           trunc (optional) : positive scalar magnitude at which component
-%               function values should be truncated
-%	    sigma (optional) : scalar defining standard deviation of noise
-% 	    seed  (optional) : scalar defining the rand/randn seed used
-%       probtype is a string specifying the type of problem desired:
-%           'smooth' corresponds to smooth (noise-free) problems
-%           'absnormal' corresponds to stochastic Gaussian absolute noise
-%           'absuniform' corresponds to stochastic uniform absolute noise
-%           'abswild' corresponds to deterministic absolute noise
-%           'relnormal' corresponds to stochastic Gaussian relative noise
-%           'reluniform' corresponds to stochastic uniform relative noise
-%           'relwild' corresponds to deterministic relative noise
-%           'nondiff' corresponds to piecewise-smooth problems
-%	**Note: the noise is applied independently to each component before
-%		the components are squared and summed, additional variance
-%		control will necessarily need to account for the value m
+% Inputs:
+%  x : n-by-1 array
+%  probspecs is a struc containing:
+%  m : positive integer (length of output from mghvec)
+%  nprob : positive integer defining the number of the problem
+%  trunc (optional) : positive scalar magnitude at which component
+%    function values should be truncated
+%  sigma (optional) : scalar defining standard deviation of noise
+%  seed  (optional) : scalar defining the rand/randn seed used
+%  probtype is a string specifying the type of problem desired:
+%   'smooth' corresponds to smooth (noise-free) problems
+%   'absnormal' corresponds to stochastic Gaussian absolute noise
+%   'absuniform' corresponds to stochastic uniform absolute noise
+%   'abswild' corresponds to deterministic absolute noise
+%   'relnormal' corresponds to stochastic Gaussian relative noise
+%   'reluniform' corresponds to stochastic uniform relative noise
+%   'relwild' corresponds to deterministic relative noise
+%   'nondiff' corresponds to piecewise-smooth problems
+%     **Note: the noise is applied independently to each component before
+%      the components are squared and summed, additional variance
+%      control will necessarily need to account for the value m
 %
-%     Outputs:
-%       y : scalar function value at x
-%       fvec : m-by-1 component function values at x
+% Outputs:
+%   y : scalar function value at x
+%   fvec : m-by-1 component function values at x
 %
-%     To store the evaluation history, additional variables are passed
-%     through global variables. These may be commented out if a user
-%     desires. They are:
-%       nfev is a non-negative integer containing the number of function
-%          evaluations done so far (nfev=0 is a good default).
-%          after calling calfun_sample, nfev will be incremented by one.
-%       np is a counter for the test problem number. np=1 is a good
-%          default if only a single problem/run will be done.
-%       fvals is a matrix containing the history of function
-%          values, the entry fvals(nfev+1,np) being updated here.
+% To store the evaluation history, additional variables are passed
+% through global variables. These may be commented out if a user
+% desires. They are:
+%   nfev is a non-negative integer containing the number of function
+%  evaluations done so far (nfev=0 is a good default).
+%  after calling calfun_sample, nfev will be incremented by one.
+%   np is a counter for the test problem number. np=1 is a good
+%  default if only a single problem/run will be done.
+%   fvals is a matrix containing the history of function
+%  values, the entry fvals(nfev+1,np) being updated here.
 %
 % ! Todo:
 % Reference the starting point script for allowable definitions. Point to
