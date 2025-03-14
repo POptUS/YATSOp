@@ -80,7 +80,7 @@ for i in range(40):      #26
     
     factor = 10**0  # revisit!
     X0, prob = dfoxsnew(probspecs['m'], probspecs['n'], probspecs['nprob'])
-    X0 = X0 + 100 * np.ones(X0.shape)
+    # X0 = X0 + 100 * np.ones(X0.shape)
     namestr.append(prob['name'])
     
     X0 = factor * X0
