@@ -39,9 +39,9 @@ def read_matdata(file_path):
 
 #################################################
 
-file_path = 'pyfofuns.txt'  
+file_path = 'pydfof.txt'  
 data1 = read_pydata(file_path)
-file_path2 = 'dfof1.txt'
+file_path2 = 'dfof.txt'
 data2 = read_matdata(file_path2)
 
 
@@ -53,15 +53,15 @@ for i in range(40):
     d1 = np.array(data1[i])
     d2 = np.array(data2[i])
     diff = np.sum((d1-d2)**2)  /  np.sum((d1)**2)
-    # print(i, diff)
-    if np.isnan(diff):
-        print(i, np.sum((d1-d2)**2))
-        print(i, np.sum((d1)**2))
+    print(i, diff)
+    # if np.isnan(diff):
+    #     print(i, np.sum((d1-d2)**2))
+    #     print(i, np.sum((d1)**2))
 
 
-file_path = 'pymidfuns.txt' 
+file_path = 'pydfomidf.txt' 
 data1 = read_pydata(file_path)
-file_path2 = 'dfomidf1.txt'
+file_path2 = 'dfomidf.txt'
 data2 = read_matdata(file_path2)
 
 
@@ -73,7 +73,7 @@ for i in range(40):
     d1 = np.array(data1[i])
     d2 = np.array(data2[i])
     diff = np.sum((d1-d2)**2)  /  np.sum((d1)**2)
-    # print(i, diff)
-    if np.isnan(diff):
-        print(i, np.sum((d1-d2)**2))
-        print(i, np.sum((d1)**2))
+    print(i, diff)
+    # if np.isnan(diff):
+    #     print(i, np.sum((d1-d2)**2))
+    #     print(i, np.sum((d1)**2))
