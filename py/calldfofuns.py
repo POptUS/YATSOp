@@ -67,7 +67,7 @@ else:
 
 
 namestr = []
-file_name = "pyfofuns100.txt"
+file_name = "pydfof.txt"
 # Loop over rows in Var (similar to the for-loop in MATLAB)
 for i in range(40):  # Python uses 0-based indexing
     probspecs['nprob'] = int(Var[i, 0])
@@ -78,7 +78,7 @@ for i in range(40):  # Python uses 0-based indexing
 
     # Get starting point and problem information
     [X0, prob] = dfoxsnew(probspecs['m'], probspecs['n'], probspecs['nprob'])
-    X0 = X0 + 100 * np.ones(X0.shape)
+    # X0 = X0 + 100 * np.ones(X0.shape)
     namestr.append(prob['name'])  # Replace with actual name retrieval logic
     X0 = factor * X0
 
