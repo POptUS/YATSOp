@@ -72,7 +72,7 @@ if noiseflag:
 else:
     print('Problem     n    m            f0     h')
 
-file_name = "pymidfuns100.txt"
+file_name = "pydfomidf.txt"
 for i in range(40):      #26
     probspecs['nprob'] = int(Var[i, 0])
     probspecs['n'] = int(Var[i, 1])
