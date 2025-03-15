@@ -54,7 +54,7 @@ nrows = size(Var, 1);
 probtype = 'smooth';
 probspecs.trunc = 10^16; % Chosen so that starting point unaffected
 
-fileID = fopen('dfof.txt','w+');
+fileID = fopen('dfof.txt', 'w+');
 fprintf('num     prob     n     m            f0     hopt    time\n');
 for i = 1:40 % nrows
     probspecs.nprob = Var(i, 1);
@@ -66,12 +66,9 @@ for i = 1:40 % nrows
     X0 = factor * X0;
 
     fvec = mghvec(probspecs.m, probspecs.n, X0, probspecs.nprob);
-    fprintf(fileID, '%s\n', mat2str(fvec)); 
-
-    %fprintf('%3i  %8s  %i  %i  %12.7g %8.0e %7.6f\n', probspecs.nprob, ...
-    %        namestr{i}, probspecs.n, probspecs.m, y, prob.h, ti);
+    fprintf(fileID, '%s\n', mat2str(fvec));
 end
-fclose(fileID); 
+fclose(fileID);
 
 
 % Largescale (Table 3 from arxiv:2102.12016)
@@ -121,7 +118,7 @@ Var = [1 100 200 1e-7 % ARGLALE
     228  100 100 0 % MOREBVNE X Not yet in agreement, replaced with MOREBV
     ];
 
-fileID = fopen('dfomidf.txt','w+');
+fileID = fopen('dfomidf.txt', 'w+');
 fprintf('num     prob     n     m            f0     hopt    time\n');
 for i = 1:40 % nrows
     probspecs.nprob = Var(i, 1);
@@ -133,10 +130,7 @@ for i = 1:40 % nrows
     X0 = factor * X0;
 
     fvec = mghvec(probspecs.m, probspecs.n, X0, probspecs.nprob);
-    fprintf(fileID, '%s\n', mat2str(fvec)); 
-
-    %fprintf('%3i  %8s  %i  %i  %12.7g %8.0e %7.6f\n', probspecs.nprob, ...
-    %        namestr{i}, probspecs.n, probspecs.m, y, prob.h, ti);
+    fprintf(fileID, '%s\n', mat2str(fvec));
 end
-fclose(fileID); 
+fclose(fileID);
 
