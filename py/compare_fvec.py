@@ -2,6 +2,7 @@ import numpy as np
 import time
 from calfun_sample import calfun_sample
 from dfoxsnew import dfoxsnew
+import os
 
 # This assumes that you have first run regressiontest.m in ../m/
 
@@ -62,6 +63,17 @@ probspecs = {'trunc': 10**16}
 print('Problem     n    m            f0     h')
 
 
+file_path = "pydfof.txt"  # No directory specified, just the file name
+
+# Only create the directory if file_path includes a directory
+dir_path = os.path.dirname(file_path)
+if dir_path:  # Avoid calling makedirs if dir_path is empty
+    os.makedirs(dir_path, exist_ok=True)
+
+# Remove the file if it exists
+if os.path.exists(file_path):
+    os.remove(file_path)
+
 namestr = []
 # Loop over rows in Var (similar to the for-loop in MATLAB)
 for i in range(40):  # Python uses 0-based indexing
@@ -83,7 +95,15 @@ for i in range(40):  # Python uses 0-based indexing
     fvec = np.array(fvec)
     list = fvec.tolist()
 
-    with open("pydfof.txt", 'a+') as file:
+    # with open("pydfof.txt", 'a+') as file:
+    #     file.write(str(list))
+    #     file.write('\n')
+
+
+
+
+    # Write to the file
+    with open(file_path, 'a+') as file:
         file.write(str(list))
         file.write('\n')
 
@@ -143,6 +163,17 @@ probspecs = {'trunc': 10**16}
 print('Problem     n    m            f0     h')
 
 
+file_path = "pydfomidf.txt"  # No directory specified, just the file name
+
+# Only create the directory if file_path includes a directory
+dir_path = os.path.dirname(file_path)
+if dir_path:  # Avoid calling makedirs if dir_path is empty
+    os.makedirs(dir_path, exist_ok=True)
+
+# Remove the file if it exists
+if os.path.exists(file_path):
+    os.remove(file_path)
+
 namestr = []
 # Loop over rows in Var (similar to the for-loop in MATLAB)
 for i in range(40):  # Python uses 0-based indexing
@@ -164,7 +195,15 @@ for i in range(40):  # Python uses 0-based indexing
     fvec = np.array(fvec)
     list = fvec.tolist()
 
-    with open("pydfomidf.txt", 'a+') as file:
+    # with open("pydfomidf.txt", 'a+') as file:
+    #     file.write(str(list))
+    #     file.write('\n')
+
+    
+
+
+    # Write to the file
+    with open(file_path, 'a+') as file:
         file.write(str(list))
         file.write('\n')
 
