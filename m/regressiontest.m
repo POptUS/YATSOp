@@ -70,7 +70,6 @@ for i = 1:40 % nrows
 end
 fclose(fileID);
 
-
 % Largescale (Table 3 from arxiv:2102.12016)
 Var = [1 100 200 1e-7 % ARGLALE
     2    100 200 5e-8 % ARGLBLE
@@ -133,4 +132,3 @@ for i = 1:40 % nrows
     fprintf(fileID, '%s\n', mat2str(fvec));
 end
 fclose(fileID);
-

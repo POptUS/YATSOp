@@ -3,6 +3,8 @@ import time
 from calfun_sample import calfun_sample
 from dfoxsnew import dfoxsnew
 
+# This assumes that you have first run regressiontest.m in ../m/
+
 # Define the array of variables, equivalent to 'Var' in MATLAB
 Var = np.array([
     [1, 2000, 4000, 0],   # ARGLALE
