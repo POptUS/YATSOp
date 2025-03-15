@@ -9,7 +9,13 @@ This page (and perhaps the set) is heavily under construction.
 
 ---
 
+## Quickstart
 
+You can find Matlab/Octave versions of the code in [m/](m/) and Python versions of the code in [py/](py/).
+
+In each case, ``calldfofuns`` and ``calldfomidfuns`` provide examples calling particular sets of these problems.
+
+A simple comparison of the two different codebases may be obtained by a Matlab/Octave call to [m/regressiontest.m](m/regressiontest.m) followed by a Python call to [py/compare_fvec.py](py/compare_fvec.py).
 
 ## Contributing to YATSOp
 
