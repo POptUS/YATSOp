@@ -1,5 +1,6 @@
 import numpy as np
 import time
+import json
 from calfun_sample import calfun_sample
 from dfoxsnew import dfoxsnew
 import os
@@ -75,6 +76,7 @@ if os.path.exists(file_path):
     os.remove(file_path)
 
 namestr = []
+results = []
 # Loop over rows in Var (similar to the for-loop in MATLAB)
 for i in range(40):  # Python uses 0-based indexing
     probspecs['nprob'] = int(Var[i, 0])
@@ -95,17 +97,13 @@ for i in range(40):  # Python uses 0-based indexing
     fvec = np.array(fvec)
     list = fvec.tolist()
 
-    # with open("pydfof.txt", 'a+') as file:
-    #     file.write(str(list))
-    #     file.write('\n')
+    results.append(fvec.tolist())
+
+with open("pydfof.txt", 'w') as file:
+    for result in results:
+        file.write(str(result) + '\n')  
 
 
-
-
-    # Write to the file
-    with open(file_path, 'a+') as file:
-        file.write(str(list))
-        file.write('\n')
 
 Var = np.array([
     [1, 100, 200, 1e-7],
@@ -175,6 +173,8 @@ if os.path.exists(file_path):
     os.remove(file_path)
 
 namestr = []
+# Prepare storage for results
+results = []
 # Loop over rows in Var (similar to the for-loop in MATLAB)
 for i in range(40):  # Python uses 0-based indexing
     probspecs['nprob'] = int(Var[i, 0])
@@ -195,18 +195,11 @@ for i in range(40):  # Python uses 0-based indexing
     fvec = np.array(fvec)
     list = fvec.tolist()
 
-    # with open("pydfomidf.txt", 'a+') as file:
-    #     file.write(str(list))
-    #     file.write('\n')
+    results.append(fvec.tolist())
 
-    
-
-
-    # Write to the file
-    with open(file_path, 'a+') as file:
-        file.write(str(list))
-        file.write('\n')
-
+with open("pydfomidf.txt", 'w') as file:
+    for result in results:
+        file.write(str(result) + '\n')  
    
 
 def read_pydata(file_path):
