@@ -447,7 +447,6 @@ def dfoxsnew(m, n, nprob):
         if n % 4 != 0:
             raise ValueError(eid, err[13])  
 
-        # 初始化 x
         x = np.array([3, -1, 0, 1])
         x = np.tile(x, (n // 4, 1)).flatten()  
 

@@ -139,7 +139,7 @@ def mghvec(m, n, x, nprob):
         
     elif nprob == 202:  # ARWHDNE , m=2n-2
         for i in range(n - 1):
-            fvec[i] = x[i] ** 2 + x[n - 1] ** 2  # 修正为 x[n-1]
+            fvec[i] = x[i] ** 2 + x[n - 1] ** 2
             fvec[n - 1 + i] = 3 - 4 * x[i]
     elif nprob == 203:  # BRATU2D. Problem 3 from More' 1990 collection
         # n must be a square, m = n

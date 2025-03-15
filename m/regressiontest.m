@@ -55,7 +55,7 @@ probtype = 'smooth';
 probspecs.trunc = 10^16; % Chosen so that starting point unaffected
 
 fileID = fopen('dfof.txt', 'w+');
-fprintf('num     prob     n     m            f0     hopt    time\n');
+% fprintf('num     prob     n     m            f0     hopt    time\n');
 for i = 1:40 % nrows
     probspecs.nprob = Var(i, 1);
     probspecs.n = Var(i, 2);
@@ -118,7 +118,7 @@ Var = [1 100 200 1e-7 % ARGLALE
     ];
 
 fileID = fopen('dfomidf.txt', 'w+');
-fprintf('num     prob     n     m            f0     hopt    time\n');
+% fprintf('num     prob     n     m            f0     hopt    time\n');
 for i = 1:40 % nrows
     probspecs.nprob = Var(i, 1);
     probspecs.n = Var(i, 2);
